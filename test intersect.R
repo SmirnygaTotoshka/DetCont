@@ -11,9 +11,8 @@ getRareVariants = function(filename){
     annovar[annovar["gnomAD_exome_ALL"] < 0.05 | is.na(annovar["gnomAD_exome_ALL"]),]
 }
 
-runs = c("wbc.4739"="epi-2022-BRCA-4739-wbc/epi-2022-BRCA-4739-wbc.annovar.splice.tsv", 
-         "wbc.4740"="epi-2022-BRCA-4740-wbc/epi-2022-BRCA-4740-wbc.annovar.splice.tsv",
-         "pcbit.4738"="epi-2022-BRCA-4738-pcblt/epi-2022-BRCA-4738-pcblt.annovar.splice.tsv")
+runs = c("wbc.4739"="epi-2022-BRCA-4739-wbc/epi-2022-BRCA-4739-wbc.annovar.tsv", 
+         "wbc.4740"="epi-2022-BRCA-4740-wbc/epi-2022-BRCA-4740-wbc.annovar.tsv")
 mut.cols = c("Chr","Start","End","Ref","Alt")
 rares = lapply(runs, getRareVariants)
 rares = lapply(rares, function(x){x[,mut.cols]})
@@ -28,3 +27,4 @@ num.intersect.SNP = unlist(lapply(seq_along(rares),
                                 )
                            )
 m.inter.SNP = matrix(num.intersect.SNP,nrow = length(runs),byrow = T)
+print(m.inter.SNP)
